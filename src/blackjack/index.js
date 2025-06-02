@@ -1,33 +1,19 @@
 import _ from "underscore";
+import { crearDeck } from "./usecases/crear-deck";
+import { insertarCartaDeck } from "./usecases/insertar-carta-deck";
 
 const btnNuevo = document.querySelector("#btnNuevo")
 const btnPedir =document.querySelector("#btnPedir")
 const btnDetener = document.querySelector("#btnDetener")
 
-let cartas = ['C','D','H','S'];
-let especiales = ['A', 'J', 'Q', 'K'];
+
 let deck = [];
 let puntosJugador = 0;
 let puntosComputadora = 0;
 
-function crearDeck() {
-    for(const carta of cartas) {
-        for(let i=2; i <= 10; i++) {
-            deck.push(`${i}${carta}`);
-        }
-    }
 
-    for(const especial of especiales) {
-         for(const carta of cartas){
-         deck.push(especial+carta)
-      }
-    }
+deck = crearDeck()
 
-}
-
-crearDeck ();
-deck = _.shuffle(deck)
-console.log(deck)
 
 
 // Esta funcion recibe una carta y retorna un valor
@@ -45,16 +31,7 @@ function obtenerValorCarta( carta ) {
         
 }
 
-function insertarCartaDeck( carta, deck ) {
-    // creo mi imagen
-    const milimagen = document.createElement("img");
 
-    milimagen.src=`assets/cartas/${carta}.png`
-    milimagen.className="carta"
-    
-    // inserto mi imagen
-    document.querySelector( deck ).append(milimagen)
-}
 
 
 function turnoComputadora() {
@@ -143,8 +120,7 @@ btnNuevo.addEventListener('click', () => {
     btnPedir.disabled = false;
     btnDetener.disabled = false;
 
-    crearDeck();
+    deck = crearDeck();
     console.log(deck)
-    deck = _.shuffle(deck);
     
 });
