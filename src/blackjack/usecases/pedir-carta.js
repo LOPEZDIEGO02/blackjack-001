@@ -1,9 +1,23 @@
 import { insertarCartaDeck } from "./insertar-carta-deck";
 
 
-// tiene que identificar para quien va a insertar la carta
-export function pedirCarta(deck) {
+
+export const referenciasDecks = {
+    jugador: '#cartas-jugador',
+    computadora: '#cartas-computadora'
+}
+
+
+/**
+ *  Esta funcion, pide una carta, y la inserta al deck del jugador 
+ * @param {carta[]} deck 
+ * @param {referenciasDecks} referenciaDeckInsertar
+ * @returns carta
+ */
+export function pedirCarta( deck, referenciaDeckInsertar ) {
+    // referenciaDeckInsertar: '#cartas-jugador',  '#cartas-computadora'
+
     const carta = deck.pop();
-    insertarCartaDeck( carta, '#cartas-jugador');
+    insertarCartaDeck( carta, referenciaDeckInsertar);
     return carta;
 }

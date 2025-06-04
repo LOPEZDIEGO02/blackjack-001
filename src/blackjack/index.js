@@ -2,7 +2,7 @@ import _ from "underscore";
 import { crearDeck } from "./usecases/crear-deck";
 import { obtenerValorCarta } from "./usecases/obtener-valor-carta.js"; 
 import { turnoComputadora } from "./usecases/turno-computadora.js"
-import { pedirCarta } from "./usecases/pedir-carta.js";
+import { pedirCarta, referenciasDecks } from "./usecases/pedir-carta.js";
 
 const btnNuevo = document.querySelector("#btnNuevo")
 const btnPedir =document.querySelector("#btnPedir")
@@ -15,7 +15,7 @@ let puntosComputadora = 0;
 deck = crearDeck()
 
 btnPedir.addEventListener('click', () => {
-    const carta = pedirCarta(deck);
+    const carta = pedirCarta(deck, referenciasDecks.jugador);
     puntosJugador = obtenerValorCarta(carta) + puntosJugador;
 
     // actulizar los puntos del jugador en el html, si el jugador pierde se tiene que desavilitar botones lo mismo si gana 
