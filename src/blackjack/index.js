@@ -1,43 +1,29 @@
 import _ from "underscore";
 import { crearDeck } from "./usecases/crear-deck";
-import { insertarCartaDeck } from "./usecases/insertar-carta-deck.js";
 import { obtenerValorCarta } from "./usecases/obtener-valor-carta.js"; 
 import { turnoComputadora } from "./usecases/turno-computadora.js"
-import { determinarGanador } from "./usecases/determinar-ganador.js";
+import { pedirCarta, referenciasDecks } from "./usecases/pedir-carta.js";
 
 const btnNuevo = document.querySelector("#btnNuevo")
 const btnPedir =document.querySelector("#btnPedir")
 const btnDetener = document.querySelector("#btnDetener")
 
 
-export let deck = [];
+let deck = [];
 let puntosJugador = 0;
-export let puntosComputadora = 0;
-
-
+let puntosComputadora = 0;
 deck = crearDeck()
 
 btnPedir.addEventListener('click', () => {
-    const carta = deck.pop();
-    
-    
-    insertarCartaDeck( carta, '#cartas-jugador')
-    determinarGanador()
-    
-    
+    const carta = pedirCarta(deck, referenciasDecks.jugador);
     puntosJugador = obtenerValorCarta(carta) + puntosJugador;
-    
 
-    console.log("tu total de puntos es:", puntosJugador)
-
-
-    
-    //actulizar los puntos del jugador en el html, si el jugador pierde se tiene que desavilitar botones lo mismo si gana 
+    // actulizar los puntos del jugador en el html, si el jugador pierde se tiene que desavilitar botones lo mismo si gana 
     if (puntosJugador > 21 ) {
         console.error("perdiste")
         btnPedir.disabled = true;
         btnDetener.disabled= true;
-        turnoComputadora();
+        turnoComputadora(puntosComputadora, puntosJugador, deck);
     } else if (puntosJugador === 21 ){
         console.warn("21 yei")
         btnPedir.disabled = true;
@@ -49,19 +35,13 @@ btnPedir.addEventListener('click', () => {
     
 });
 
-
-
-
 //agregar boton detener, lo que tiene que hacer es desabilitar botones 
 btnDetener.addEventListener('click', () => {
-    turnoComputadora()
+    turnoComputadora(puntosComputadora, puntosJugador, deck)
     btnPedir.disabled = true;
     btnDetener.disabled = true;
 
 });
-
-// tarea caundo sele click al boton nuevo que se vacie 
-
 
 btnNuevo.addEventListener('click', () => {
     deck = [];
@@ -75,6 +55,5 @@ btnNuevo.addEventListener('click', () => {
     btnDetener.disabled = false;
 
     deck = crearDeck();
-    console.log(deck)
     
 });

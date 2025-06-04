@@ -1,16 +1,15 @@
-import {  } from "../index.js"
 
-export function determinarGanador (){
-    if (puntosJugador  === puntosComputadora === 21 ){
-        console.log("empate")
+export function determinarGanador (puntosComputadora, puntosJugador){
+    if (puntosJugador === 21 && puntosComputadora === 21) {
+    alert("Empate");
     }else if (puntosJugador>21){
-        console.log("perdiste")        
+        alert("perdiste")        
     }else if(puntosComputadora >21){
-        console.log("ganaste")
+        alert("ganaste")
     }else if (puntosComputadora > puntosJugador && puntosComputadora < 21) {
-        console.log("La computadora gano");
+        alert("La computadora gano");
     }else if(puntosComputadora ===21){
-        console.log("computadora gano")
+        alert("computadora gano")
 
     }
     

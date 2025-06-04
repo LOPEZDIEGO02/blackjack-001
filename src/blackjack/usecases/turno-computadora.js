@@ -1,21 +1,19 @@
-import { deck } from "../index.js"
+
+import { determinarGanador } from "./determinar-ganador.js";
 import { insertarCartaDeck } from "./insertar-carta-deck.js";
 import { obtenerValorCarta } from "./obtener-valor-carta.js";
-import {  } from "./obtener-valor-carta.js";
-// import { determinarGanador } from "./determinar-ganador.js";
+import { pedirCarta, referenciasDecks } from "./pedir-carta.js";
 
-export let puntosComputadora = 0;
-export let puntosJugador = 0;
 
-export function turnoComputadora() {
+export function turnoComputadora(puntosComputadora, puntosJugador, deck) {
     do{
-        const carta = deck.pop();
-        insertarCartaDeck( carta,  '#cartas-computadora');    
+        // const carta = deck.pop();
+        // insertarCartaDeck( carta,  '#cartas-computadora');    
+        const carta = pedirCarta( deck, referenciasDecks.computadora )
         puntosComputadora = obtenerValorCarta(carta) + puntosComputadora;
         document.querySelector(`#turno-compu small`).innerText = puntosComputadora;    
-        console.log("tu total de puntos es:", puntosComputadora)
 
     } while(puntosJugador > puntosComputadora && puntosJugador <=21)
 
-    }
-
+    determinarGanador(puntosComputadora, puntosJugador);
+}
