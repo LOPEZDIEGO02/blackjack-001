@@ -1,59 +1,28 @@
 import _ from "underscore";
 import { crearDeck } from "./usecases/crear-deck";
-import { insertarCartaDeck } from "./usecases/insertar-carta-deck";
+import { insertarCartaDeck } from "./usecases/insertar-carta-deck.js";
+import { obtenerValorCarta } from "./usecases/obtener-valor-carta.js"; 
+import { turnoComputadora } from "./usecases/turno-computadora.js"
+import { determinarGanador } from "./usecases/determinar-ganador.js";
 
 const btnNuevo = document.querySelector("#btnNuevo")
 const btnPedir =document.querySelector("#btnPedir")
 const btnDetener = document.querySelector("#btnDetener")
 
 
-let deck = [];
+export let deck = [];
 let puntosJugador = 0;
-let puntosComputadora = 0;
+export let puntosComputadora = 0;
 
 
 deck = crearDeck()
-
-
-
-// Esta funcion recibe una carta y retorna un valor
-// ejemplo: 3,10,11...
-function obtenerValorCarta( carta ) {
-    const cartaCortada = carta.slice(0,carta.length-1)
-
-    if( !isNaN(cartaCortada) ) {
-        return Number(cartaCortada);
-    } else  if ( cartaCortada == "A") {
-        return 11;
-    } else {
-        return 10;            
-    }
-        
-}
-
-
-
-
-function turnoComputadora() {
-    do{
-        const carta = deck.pop();
-        insertarCartaDeck( carta,  '#cartas-computadora');    
-        puntosComputadora = obtenerValorCarta(carta) + puntosComputadora;
-        document.querySelector(`#turno-compu small`).innerText = puntosComputadora;    
-        console.log("tu total de puntos es:", puntosComputadora)
-
-    } while(puntosJugador > puntosComputadora && puntosJugador <=21)
-
-        determinarGanador()
-}
-
 
 btnPedir.addEventListener('click', () => {
     const carta = deck.pop();
     
     
     insertarCartaDeck( carta, '#cartas-jugador')
-
+    determinarGanador()
     
     
     puntosJugador = obtenerValorCarta(carta) + puntosJugador;
@@ -92,22 +61,7 @@ btnDetener.addEventListener('click', () => {
 });
 
 // tarea caundo sele click al boton nuevo que se vacie 
-function determinarGanador (){
-    if (puntosJugador  === puntosComputadora === 21 ){
-        console.log("empate")
-    }else if (puntosJugador>21){
-        console.log("perdiste")        
-    }else if(puntosComputadora >21){
-        console.log("ganaste")
-    }else if (puntosComputadora > puntosJugador && puntosComputadora < 21) {
-        console.log("La computadora gano");
-    }else if(puntosComputadora ===21){
-        console.log("computadora gano")
 
-    }
-    
-
-}
 
 btnNuevo.addEventListener('click', () => {
     deck = [];
