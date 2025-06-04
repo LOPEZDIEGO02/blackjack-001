@@ -1,4 +1,3 @@
-import {  } from "../index.js"
 
 
 export function determinarGanador (puntosComputadora, puntosJugador){
