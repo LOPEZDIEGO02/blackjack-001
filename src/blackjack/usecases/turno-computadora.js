@@ -2,12 +2,9 @@ import { deck } from "../index.js"
 import { insertarCartaDeck } from "./insertar-carta-deck.js";
 import { obtenerValorCarta } from "./obtener-valor-carta.js";
 import {  } from "./obtener-valor-carta.js";
-// import { determinarGanador } from "./determinar-ganador.js";
 
-export let puntosComputadora = 0;
-export let puntosJugador = 0;
 
-export function turnoComputadora() {
+export function turnoComputadora(puntosComputadora, puntosJugador) {
     do{
         const carta = deck.pop();
         insertarCartaDeck( carta,  '#cartas-computadora');    

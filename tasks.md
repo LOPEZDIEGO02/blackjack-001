@@ -1,0 +1,1 @@
+- El boton de detener no se esta accionando cuando el jugador pierde

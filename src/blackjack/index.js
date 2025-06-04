@@ -21,8 +21,8 @@ btnPedir.addEventListener('click', () => {
     const carta = deck.pop();
     
     
-    insertarCartaDeck( carta, '#cartas-jugador')
-    determinarGanador()
+    insertarCartaDeck( carta, '#cartas-jugador');
+    determinarGanador(puntosComputadora, puntosJugador);
     
     
     puntosJugador = obtenerValorCarta(carta) + puntosJugador;
@@ -37,7 +37,7 @@ btnPedir.addEventListener('click', () => {
         console.error("perdiste")
         btnPedir.disabled = true;
         btnDetener.disabled= true;
-        turnoComputadora();
+        turnoComputadora(puntosComputadora, puntosJugador);
     } else if (puntosJugador === 21 ){
         console.warn("21 yei")
         btnPedir.disabled = true;
@@ -54,7 +54,7 @@ btnPedir.addEventListener('click', () => {
 
 //agregar boton detener, lo que tiene que hacer es desabilitar botones 
 btnDetener.addEventListener('click', () => {
-    turnoComputadora()
+    turnoComputadora(puntosComputadora, puntosJugador)
     btnPedir.disabled = true;
     btnDetener.disabled = true;
 
