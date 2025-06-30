@@ -1,0 +1,13 @@
+import './style.css'
+import { App } from './todos/app'
+import { Tarea } from './todos/models/todo.model';
+
+App('#app')
+
+
+//EN EL TODO STORE VAMO A CREAR LA FUNCION GETTODO 
+// CREAR UN MODELO DE TAREA CON POO 
+// CREAR UN FUNCION PARA RENDERISAR LAS TERAS 
+// CRAR UN FUNCION PARA CARGA LAS TAREAS
+//EN LA FUNCION CREAR TAREAS AGREGAR TAREAS EN BRUTO Y RENDERISAR 
+

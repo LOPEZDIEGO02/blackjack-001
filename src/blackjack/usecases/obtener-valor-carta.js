@@ -2,7 +2,6 @@
 // ejemplo: 3,10,11...
 export function obtenerValorCarta( carta ) {
     const cartaCortada = carta.slice(0,carta.length-1)
-    console.log(carta)
 
     if( !isNaN(cartaCortada) ) {
         return Number(cartaCortada);
